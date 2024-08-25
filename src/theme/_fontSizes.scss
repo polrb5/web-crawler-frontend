@@ -1,0 +1,43 @@
+// Font Sizes
+$font-size-xs: 1rem;
+$font-size-sm: 1.2rem;
+$font-size-base: 1.4rem;
+$font-size-base-plus: 1.5rem;
+$font-size-md: 1.6rem;
+$font-size-md-plus: 1.8rem;
+$font-size-lg: 2rem;
+$font-size-lg-plus: 2.2rem;
+$font-size-xl: 2.4rem;
+$font-size-xl-plus: 2.6rem;
+$font-size-xxl: 2.8rem;
+$font-size-xxxl: 3rem;
+$font-size-heading-sm: 3.2rem;
+$font-size-heading-md: 4rem;
+$font-size-heading-md-plus: 4.8rem;
+$font-size-heading-lg: 6rem;
+$font-size-heading-xl: 7.2rem;
+
+// Clamp variables
+$clamp-sm--base: clamp($font-size-sm, 4vw, $font-size-base);
+$clamp-base--base-plus: clamp($font-size-base, 4vw, $font-size-base-plus);
+$clamp-sm--md: clamp($font-size-sm, 1.5vw, $font-size-md);
+$clamp-base-plus--md: clamp($font-size-base-plus, 1.5vw, $font-size-md);
+$clamp-md--md-plus: clamp($font-size-md, 2vw, $font-size-md-plus);
+$clamp-lg--xl: clamp($font-size-lg, 2vw, $font-size-xl);
+$clamp-xl-plus--heading-sm: clamp(
+  $font-size-xl-plus,
+  5vw,
+  $font-size-heading-sm
+);
+$clamp-heading-sm--md: clamp($font-size-heading-sm, 5vw, $font-size-heading-md);
+$clamp-heading-sm--md-plus: clamp(
+  $font-size-heading-sm,
+  5vw,
+  $font-size-heading-md-plus
+);
+$clamp-heading-md--lg: clamp($font-size-heading-md, 4vw, $font-size-heading-lg);
+$clamp-heading-md--lg-large: clamp(
+  $font-size-heading-md,
+  6vw,
+  $font-size-heading-lg
+);
