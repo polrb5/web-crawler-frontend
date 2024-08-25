@@ -1,9 +1,22 @@
 @use '@/theme/index' as *;
 
+@font-face {
+  font-family: 'Fredoka';
+  src: url('../assets/fonts/Inter/Inter-Regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Fredoka';
+  src: url('../assets/fonts/Inter/Inter-Bold.ttf');
+  font-weight: bold;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Inter';
 }
 
 html,

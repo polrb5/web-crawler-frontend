@@ -1,0 +1,49 @@
+@use '@/theme/index' as *;
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__error {
+    color: $error-red;
+    text-align: center;
+    font-size: $font-size-sm;
+  }
+
+  &__button {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    background-color: $primary-500;
+    color: $mono-100;
+    border: none;
+    border-radius: 8px;
+    font-size: $font-size-md;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $primary-400;
+    }
+
+    &:disabled {
+      background-color: $mono-400;
+      cursor: not-allowed;
+    }
+  }
+
+  &__register-link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: $font-size-base;
+
+    a {
+      color: $primary-500;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

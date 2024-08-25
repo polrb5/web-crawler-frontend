@@ -28,5 +28,5 @@
       "@/utils/*": ["utils/*"]
     }
   },
-  "include": [".eslintrc.cjs", "src"]
+  "include": ["eslint.config.js", "src"]
 }

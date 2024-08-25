@@ -1,0 +1,40 @@
+@use '@/theme/index' as *;
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: $font-size-md;
+    color: $mono-700;
+  }
+
+  &__field {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: $font-size-base-plus;
+    border: 1px solid $mono-300;
+    border-radius: 8px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-500;
+    }
+
+    &--required {
+      border: 1px solid $error-red;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    display: flex;
+    justify-content: end;
+    font-size: $font-size-xs;
+    color: $error-red;
+  }
+}
