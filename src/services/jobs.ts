@@ -3,14 +3,13 @@ import { ApiResponse } from '@/types/services';
 
 const { VITE_API_URL } = import.meta.env;
 
-export const login = async (
-  email: string,
-  password: string,
-): Promise<ApiResponse<string>> => {
+export const createJob = async (url: string): Promise<ApiResponse<string>> => {
   const query = `
     mutation {
-      login(email: "${email}", password: "${password}") {
-        token
+      createCrawlJob(url: "${url}") {
+        id
+        url
+        status
       }
     }
   `;
@@ -25,28 +24,27 @@ export const login = async (
     });
 
     const result = await fetchResponse.json();
-    const fetchedToken = result.data?.login?.token;
+    const crawlJob = result.data?.createCrawlJob;
 
-    if (fetchedToken) {
-      localStorage.setItem('token', fetchedToken);
-      return response(true, null, fetchedToken);
+    if (crawlJob) {
+      return response(true, null, crawlJob);
     }
 
     return response(false, result.errors[0].message);
   } catch (error) {
-    const errorMessage = (error as Error).message || 'Login error';
+    const errorMessage = (error as Error).message || 'Failed to create job';
     return response(false, errorMessage);
   }
 };
 
-export const register = async (
-  email: string,
-  password: string,
-): Promise<ApiResponse<string>> => {
+export const getJobStatus = async (
+  jobId: string,
+): Promise<ApiResponse<{ status: string; foundUrls: string[] }>> => {
   const query = `
-    mutation {
-      register(email: "${email}", password: "${password}") {
-        token
+    query {
+      getCrawlJob(id: "${jobId}") {
+        status
+        foundUrls
       }
     }
   `;
@@ -61,19 +59,15 @@ export const register = async (
     });
 
     const result = await fetchResponse.json();
-    const fetchedToken = result.data?.register?.token;
+    const jobData = result.data?.getCrawlJob;
 
-    if (fetchedToken) {
-      localStorage.setItem('token', fetchedToken);
-      return response(true, null, fetchedToken);
+    if (jobData) {
+      return response(true, null, jobData);
     }
 
     return response(false, result.errors[0].message);
   } catch (error) {
-    const errorMessage = (error as Error).message || 'Registration error';
-    console.error('Registration error:', errorMessage);
+    const errorMessage = (error as Error).message || 'Failed to get job status';
     return response(false, errorMessage);
   }
 };
-
-export const logout = () => localStorage.removeItem('token');

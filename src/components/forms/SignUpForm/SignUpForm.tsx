@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Card, InputField } from '@/components/ui';
+import { Button, Card, ErrorMessage, InputField } from '@/components/ui';
 import { register } from '@/services/auth';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -25,14 +25,18 @@ const SignUpForm = () => {
 
     setIsLoading(true);
 
-    const { success, data, message } = await register(email, password);
+    const {
+      success,
+      data,
+      message: responseMessage,
+    } = await register(email, password);
 
     if (success && data) {
       setSessionToken(data);
     }
-    if (!success && message) {
+    if (!success && responseMessage) {
       setError(true);
-      setMessage(message || 'Registration failed. Please try again.');
+      setMessage(responseMessage || 'Registration failed. Please try again.');
     }
 
     setIsLoading(false);
@@ -61,21 +65,13 @@ const SignUpForm = () => {
           showError={error && !password}
           placeholder="Enter your password"
         />
-        {error && message && (
-          <p className={styles['form-wrapper__error']}>{message}</p>
-        )}
-        <button
-          type="submit"
-          className={styles['form-wrapper__button']}
-          disabled={isLoading}
-        >
+        <ErrorMessage error={error} message={message} />
+        <Button type="submit" disabled={isLoading} variant="primary">
           {isLoading ? 'Registering...' : 'Register'}
-        </button>
+        </Button>
       </form>
       <div className={styles['form-wrapper__register-link']}>
-        <p>
-          Already have an account? <Link to="/login">Login here</Link>
-        </p>
+        Already have an account? <Link to="/login">Login here</Link>
       </div>
     </Card>
   );

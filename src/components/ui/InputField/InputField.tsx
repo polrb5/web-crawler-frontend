@@ -39,7 +39,7 @@ const InputField = ({
       onChange={onChange}
     />
     {required && showError && (
-      <span className={styles['input-wrapper__error']}>Camp obligatori</span>
+      <span className={styles['input-wrapper__error']}>Required field</span>
     )}
   </div>
 );

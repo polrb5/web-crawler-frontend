@@ -1,0 +1,23 @@
+@use '@/theme/index' as *;
+
+.create-job {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $mono-200;
+  border-radius: 10px;
+
+  &__heading {
+    font-size: $font-size-lg;
+    color: $primary-900;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
