@@ -1,20 +1,30 @@
 import { FormEvent, useState } from 'react';
+
 import { Button, ErrorMessage, InputField } from '@/components/ui';
 import { createJob } from '@/services/jobs';
+import { Job } from '@/types/job';
+
 import styles from './CreateJob.module.scss';
+import { ERROR_MESSAGES } from '@/constants/errors';
 
 interface CreateJobProps {
-  onJobCreated: (jobId: string) => void;
+  onJobCreated: (newJob: Job) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
-const CreateJob = ({ onJobCreated }: CreateJobProps) => {
+const CreateJob = ({
+  onJobCreated,
+  isLoading,
+  setIsLoading,
+}: CreateJobProps) => {
   const [url, setUrl] = useState('');
   const [error, setError] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     if (error) setError(false);
     if (message) setMessage(null);
     if (!url) return setError(true);
@@ -27,11 +37,10 @@ const CreateJob = ({ onJobCreated }: CreateJobProps) => {
       onJobCreated(data);
     }
     if (!success && responseMessage) {
-      setMessage(responseMessage || 'Failed to create job. Please try again.');
+      setIsLoading(false);
       setError(true);
+      setMessage(responseMessage || ERROR_MESSAGES.FAILED_CREATE_JOB);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -51,7 +60,7 @@ const CreateJob = ({ onJobCreated }: CreateJobProps) => {
           placeholder="Enter the root URL"
         />
         <ErrorMessage error={error} message={message} />
-        <Button type="submit" disabled={isLoading} variant="primary">
+        <Button type="submit" disabled={isLoading || !url} variant="primary">
           {isLoading ? 'Creating Job...' : 'Create Job'}
         </Button>
       </form>

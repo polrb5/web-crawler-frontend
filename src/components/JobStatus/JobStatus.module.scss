@@ -9,71 +9,44 @@
   }
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 4rem;
-  padding: 2rem;
-}
-
-.create-job {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: $mono-200;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba($mono-900, 0.1);
-
-  &__heading {
-    font-size: $font-size-lg;
-    color: $primary-900;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  &__error {
-    color: $error-red;
-    text-align: center;
-    font-size: $font-size-sm;
-  }
-}
-
 .job-status {
   width: 100%;
-  max-width: 600px;
+  max-width: 60rem;
+  height: 100%;
   margin: 0 auto;
   padding: 2rem;
   background-color: $mono-100;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba($mono-900, 0.1);
 
-  &__heading {
-    font-size: $font-size-lg;
-    color: $primary-800;
-    margin-bottom: 1rem;
+  &--loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  &__status {
-    font-size: $font-size-md;
-    margin-bottom: 1rem;
-    color: $primary-600;
+  &__stats {
+    margin-bottom: 2rem;
+
+    &__heading {
+      font-size: $font-size-lg;
+      color: $primary-800;
+      margin-bottom: 1rem;
+    }
+
+    &__status {
+      font-size: $font-size-md;
+      margin-bottom: 1rem;
+      color: $primary-600;
+    }
   }
 
   &__urls {
     margin-top: 1rem;
 
-    h4 {
+    &__heading {
       font-size: $font-size-md-plus;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: $primary-800;
     }
 
@@ -89,8 +62,21 @@
         font-size: $font-size-base;
         color: $primary-900;
         word-break: break-word;
+
+        & a:hover {
+          color: $primary-500;
+          text-decoration: underline;
+        }
       }
     }
+  }
+
+  &__no-urls {
+    font-size: $font-size-md;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-align: center;
   }
 
   &__loading {

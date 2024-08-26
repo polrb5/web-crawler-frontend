@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import styles from './ErrorMessage.module.scss';
 
 interface ErrorMessageProps {
-  error: boolean;
+  error?: boolean;
   message: string | null;
   className?: string;
 }

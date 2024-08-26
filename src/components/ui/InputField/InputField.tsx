@@ -2,6 +2,8 @@ import { ChangeEvent } from 'react';
 
 import clsx from 'clsx';
 
+import { ERROR_MESSAGES } from '@/constants/errors';
+
 import styles from './InputField.module.scss';
 
 interface InputFieldProps {
@@ -39,7 +41,9 @@ const InputField = ({
       onChange={onChange}
     />
     {required && showError && (
-      <span className={styles['input-wrapper__error']}>Required field</span>
+      <span className={styles['input-wrapper__error']}>
+        {ERROR_MESSAGES.REQUIRED_FIELD}
+      </span>
     )}
   </div>
 );

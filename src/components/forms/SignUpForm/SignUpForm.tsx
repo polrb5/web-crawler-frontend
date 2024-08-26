@@ -7,6 +7,7 @@ import { register } from '@/services/auth';
 import { useAuth } from '@/contexts/AuthContext';
 
 import styles from './SignUpForm.module.scss';
+import { ERROR_MESSAGES } from '@/constants/errors';
 
 const SignUpForm = () => {
   const { setSessionToken } = useAuth();
@@ -36,7 +37,7 @@ const SignUpForm = () => {
     }
     if (!success && responseMessage) {
       setError(true);
-      setMessage(responseMessage || 'Registration failed. Please try again.');
+      setMessage(responseMessage || ERROR_MESSAGES.FAILED_REGISTRATION);
     }
 
     setIsLoading(false);

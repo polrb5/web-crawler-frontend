@@ -71,7 +71,6 @@ export const register = async (
     return response(false, result.errors[0].message);
   } catch (error) {
     const errorMessage = (error as Error).message || 'Registration error';
-    console.error('Registration error:', errorMessage);
     return response(false, errorMessage);
   }
 };

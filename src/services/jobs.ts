@@ -1,9 +1,10 @@
 import response from '@/services/lib/response';
+import { Job } from '@/types/job';
 import { ApiResponse } from '@/types/services';
 
 const { VITE_API_URL } = import.meta.env;
 
-export const createJob = async (url: string): Promise<ApiResponse<string>> => {
+export const createJob = async (url: string): Promise<ApiResponse<Job>> => {
   const query = `
     mutation {
       createCrawlJob(url: "${url}") {

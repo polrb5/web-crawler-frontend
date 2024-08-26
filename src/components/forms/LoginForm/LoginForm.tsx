@@ -7,6 +7,7 @@ import { login } from '@/services/auth';
 import { useAuth } from '@/contexts/AuthContext';
 
 import styles from './LoginForm.module.scss';
+import { ERROR_MESSAGES } from '@/constants/errors';
 
 const LoginForm = () => {
   const { setSessionToken } = useAuth();
@@ -36,7 +37,7 @@ const LoginForm = () => {
     }
     if (!success && responseMessage) {
       setError(true);
-      setMessage(responseMessage || 'Invalid credentials. Please try again.');
+      setMessage(responseMessage || ERROR_MESSAGES.FAILED_LOGIN);
     }
 
     setIsLoading(false);

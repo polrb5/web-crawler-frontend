@@ -1,21 +1,27 @@
 import { useState } from 'react';
 
+import { Job } from '@/types/job';
 import CreateJob from '@/components/forms/CreateJob';
 import JobStatus from '@/components/JobStatus/JobStatus';
 
 import styles from './JobManager.module.scss';
 
 const JobManager = () => {
-  const [jobId, setJobId] = useState<string | null>(null);
+  const [job, setJob] = useState<Job | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleJobCreated = (newJobId: string) => {
-    setJobId(newJobId);
+  const handleJobCreated = (newJob: Job) => {
+    setJob(newJob);
   };
 
   return (
     <div className={styles.content}>
-      <CreateJob onJobCreated={handleJobCreated} />
-      {jobId && <JobStatus jobId={jobId} />}
+      <CreateJob
+        onJobCreated={handleJobCreated}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
+      <JobStatus job={job} isLoading={isLoading} setIsLoading={setIsLoading} />
     </div>
   );
 };
