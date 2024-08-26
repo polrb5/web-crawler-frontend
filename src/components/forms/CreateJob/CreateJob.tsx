@@ -3,9 +3,9 @@ import { FormEvent, useState } from 'react';
 import { Button, ErrorMessage, InputField } from '@/components/ui';
 import { createJob } from '@/services/jobs';
 import { Job } from '@/types/job';
+import { ERROR_MESSAGES } from '@/constants/errors';
 
 import styles from './CreateJob.module.scss';
-import { ERROR_MESSAGES } from '@/constants/errors';
 
 interface CreateJobProps {
   onJobCreated: (newJob: Job) => void;

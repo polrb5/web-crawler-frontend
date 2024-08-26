@@ -35,9 +35,17 @@
     }
 
     &__status {
+      display: flex;
+      justify-content: centre;
+      align-items: center;
+      gap: 1rem;
       font-size: $font-size-md;
       margin-bottom: 1rem;
       color: $primary-600;
+
+      &__title {
+        font-weight: bold;
+      }
     }
   }
 

@@ -3,11 +3,11 @@ import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button, Card, ErrorMessage, InputField } from '@/components/ui';
-import { register } from '@/services/auth';
 import { useAuth } from '@/contexts/AuthContext';
+import { ERROR_MESSAGES } from '@/constants/errors';
+import { register } from '@/services/auth';
 
 import styles from './SignUpForm.module.scss';
-import { ERROR_MESSAGES } from '@/constants/errors';
 
 const SignUpForm = () => {
   const { setSessionToken } = useAuth();

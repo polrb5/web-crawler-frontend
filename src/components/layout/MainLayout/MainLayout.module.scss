@@ -1,9 +1,9 @@
 @use '@/theme/index' as *;
 
 .main-layout {
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
   &__content {
     flex-grow: 1;

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+import clsx from 'clsx';
+
 import { getJobStatus } from '@/services/jobs';
 import { Job } from '@/types/job';
 import { JOB_STATUS } from '@/constants/status';
-import styles from './JobStatus.module.scss';
 import { ErrorMessage } from '@/components/ui';
 import { capitalize } from '@/utils/text';
-import clsx from 'clsx';
 import { ERROR_MESSAGES } from '@/constants/errors';
+
+import styles from './JobStatus.module.scss';
 
 interface JobStatusProps {
   job: Job | null;
@@ -19,6 +21,7 @@ const INTERVAL_TIME = 5000;
 const JobStatus = ({ job, isLoading, setIsLoading }: JobStatusProps) => {
   const [status, setStatus] = useState<string>(JOB_STATUS.LOADING);
   const [urls, setUrls] = useState<string[]>([]);
+  const [error, setError] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -50,6 +53,7 @@ const JobStatus = ({ job, isLoading, setIsLoading }: JobStatusProps) => {
         }
       }
       if (!success && responseMessage) {
+        setError(true);
         setIsLoading(false);
         setMessage(
           responseMessage || ERROR_MESSAGES.JOB_FAILED_DURING_CRAWLING,
@@ -76,18 +80,25 @@ const JobStatus = ({ job, isLoading, setIsLoading }: JobStatusProps) => {
         [styles['job-status--loading']]: isLoading,
       })}
     >
-      {!isLoading && job && (
+      {!isLoading && job && !error && (
         <>
           <div className={styles['job-status__stats']}>
             <h4 className={styles['job-status__stats__heading']}>Stats:</h4>
-            <p className={styles['job-status__stats__status']}>
-              --&gt; <strong>Status:</strong> {capitalize(status)}
-            </p>
-            <p className={styles['job-status__stats__status']}>
-              --&gt; <strong>Total URLs Found:</strong> {urls.length}
-            </p>
+            <div className={styles['job-status__stats__status']}>
+              --&gt;
+              <span className={styles['job-status__stats__status__title']}>
+                Status:
+              </span>
+              <span>{capitalize(status)}</span>
+            </div>
+            <div className={styles['job-status__stats__status']}>
+              --&gt;
+              <span className={styles['job-status__stats__status__title']}>
+                Total URLs Found:
+              </span>
+              <span>{urls.length}</span>
+            </div>
           </div>
-          <ErrorMessage message={message} />
           <div className={styles['job-status__urls']}>
             <h4 className={styles['job-status__urls__heading']}>URLs Found:</h4>
             {status === JOB_STATUS.COMPLETED && (
@@ -112,7 +123,10 @@ const JobStatus = ({ job, isLoading, setIsLoading }: JobStatusProps) => {
           </div>
         </>
       )}
-      {isLoading && <div className={styles['job-status__loading']} />}
+      {isLoading && (
+        <div role="status" className={styles['job-status__loading']} />
+      )}
+      <ErrorMessage message={message} error={error} />
     </div>
   );
 };

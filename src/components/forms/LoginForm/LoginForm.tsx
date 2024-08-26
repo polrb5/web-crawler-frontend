@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { Button, Card, ErrorMessage, InputField } from '@/components/ui';
 import { login } from '@/services/auth';
 import { useAuth } from '@/contexts/AuthContext';
+import { ERROR_MESSAGES } from '@/constants/errors';
 
 import styles from './LoginForm.module.scss';
-import { ERROR_MESSAGES } from '@/constants/errors';
 
 const LoginForm = () => {
   const { setSessionToken } = useAuth();
